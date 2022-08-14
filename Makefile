@@ -29,3 +29,10 @@ test:	## Run project tests
 .PHONY: run
 run: ## Run uvicorn localy
 	cd reactions_api; uvicorn main:app --reload
+
+.PHONY: lint
+lint:  ## Linter project code.
+	black --line-length=120 . --exclude="/(\.eggs|\.git|\.hg|\.mypy_cache|\.nox|\.tox|\.venv|\.svn|_build|buck-out|build|dist|fixtures)/"
+	isort .
+	mypy --ignore-missing-imports reactions_api
+	flake8 --config .flake8 .
