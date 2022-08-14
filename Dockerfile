@@ -5,6 +5,7 @@ FROM python:3.10-slim as builder
 WORKDIR /pipfiles
 COPY Pipfile Pipfile
 COPY Pipfile.lock Pipfile.lock
+COPY requirements.txt requirements.txt 
 
 #Install libcairo
 RUN apt-get update
@@ -17,7 +18,8 @@ RUN set -ex && pip install --trusted-host pypi.org --trusted-host files.pythonho
 RUN set -ex && pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org pipenv --upgrade
 
 # Install dependencies
-RUN set -ex && pipenv lock -r > req.txt && pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r req.txt
+# RUN set -ex && pipenv lock -r > requirements.txt
+RUN set -ex && pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
 
 # copy files
 FROM builder as final
