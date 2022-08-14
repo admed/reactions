@@ -26,3 +26,6 @@ FROM builder as final
 WORKDIR /app
 COPY ./reactions_api/ /app/reactions_api/
 COPY ./tests/ /app/tests/
+
+# set env
+ENV PYTHONPATH "${PYTHONPATH}:/app/"
