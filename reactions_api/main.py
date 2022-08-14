@@ -13,6 +13,16 @@ async def root():
 
 @app.post("/", response_description="Reaction performed successfully")
 async def root(reaction_smarts:str, reactants:str)->set():
+    """
+    Run the reaction SMARTS on reactants supplied in SMILES
+    
+    Example input:
+
+    {"reaction_smarts": "[c:8]-[c:6]>>[c:8][I:55].[B:99][c:6]", "reactants": "CC1=CC=C(C=C1)C1=CC(=CC=C1C)C1=CC(C)=CC(C)=C1"}
+
+    - **reaction_smarts**: valid SMARTS code for reaction
+    - **reactants**: valid SMILES code for reactants
+    """
     # validate reaction smarts and create reaction object from smarts
     try:
         # create rdkit reaction object from smarts 
