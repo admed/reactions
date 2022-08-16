@@ -5,7 +5,7 @@ from fastapi.exceptions import HTTPException
 from rdkit import Chem
 from rdkit.Chem import AllChem
 
-output_limit = 20 
+output_limit = 20
 
 app = FastAPI()
 
@@ -68,4 +68,4 @@ async def root(reaction_smarts: str, reactants: str) -> dict():
     # limit output to defined number
     products_smiles_list = list(product_smiles)[0:20]
     # return set of reactants smiles codes
-    return {"products":products_smiles_list}
+    return {"products": products_smiles_list}
