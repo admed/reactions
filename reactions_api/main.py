@@ -5,6 +5,8 @@ from fastapi.exceptions import HTTPException
 from rdkit import Chem
 from rdkit.Chem import AllChem
 
+output_limit = 20 
+
 app = FastAPI()
 
 
@@ -57,5 +59,7 @@ async def root(reaction_smarts: str, reactants: str) -> set():
             # check if code is unique and add to set
             if smi not in product_smiles:
                 product_smiles.add(smi)
+    # limit output to defined number
+    smiles_list = list(product_smiles)[0:20]
     # return set of reactants smiles codes
-    return product_smiles
+    return smiles_list
