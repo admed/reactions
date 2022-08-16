@@ -16,7 +16,7 @@ async def root():
 
 
 @app.post("/", response_description="Reaction performed successfully")
-async def root(reaction_smarts: str, reactants: str) -> list():
+async def root(reaction_smarts: str, reactants: str) -> dict():
     """
     Run the reaction SMARTS on reactants supplied in SMILES
 
@@ -28,9 +28,10 @@ async def root(reaction_smarts: str, reactants: str) -> list():
     - **reactants**: valid SMILES code for reactants
 
     Example output:
+
     List of SMILES codes (reaction products)
 
-    ["Cc1ccc(I)cc1", "Bc1ccc(C)c(-c2ccc(C)cc2)c1","Cc1ccc(-c2cc(I)ccc2C)cc1"]
+    {"products":["Cc1ccc(I)cc1", "Bc1ccc(C)c(-c2ccc(C)cc2)c1","Cc1ccc(-c2cc(I)ccc2C)cc1"]}
     """
     # validate reaction smarts and create reaction object from smarts
     try:
@@ -67,4 +68,4 @@ async def root(reaction_smarts: str, reactants: str) -> list():
     # limit output to defined number
     products_smiles_list = list(product_smiles)[0:20]
     # return set of reactants smiles codes
-    return products_smiles_list
+    return {"products":products_smiles_list}
